@@ -5,14 +5,32 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="交互式大脑解剖学图谱 — 面向心理学研究生的3D可交互脑区学习工具">
 <title>交互式大脑解剖学图谱 | 心理学研究生工具</title>
-<!-- Three.js CDN -->
+<!-- Three.js CDN (jsDelivr - works in most regions) -->
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
 <script type="importmap">
 {
   "imports": {
-    "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
-    "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
+    "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+    "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
   }
 }
+</script>
+<!-- Fallback: if import map fails, try unpkg -->
+<script>
+window.addEventListener('error', function(e) {
+  if (e.target && e.target.tagName === 'SCRIPT' && e.target.type === 'importmap') {
+    console.warn('jsDelivr import map failed, trying unpkg...');
+    var fallback = document.createElement('script');
+    fallback.type = 'importmap';
+    fallback.textContent = JSON.stringify({
+      imports: {
+        "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+        "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
+      }
+    });
+    document.head.appendChild(fallback);
+  }
+}, true);
 </script>
 <style>
 /* ========== CSS 自定义属性 ========== */
